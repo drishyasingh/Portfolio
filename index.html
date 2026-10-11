@@ -18,6 +18,7 @@
   --muted:#FFFFFF;
   --name:#FFFFFF;
   --rule:rgba(255,255,255,.4);
+  --blue:#1F3A93;
   --warm:#FFB86B;
   --leaf:#1B7A4E; --leaf-dk:#0F5A3B; --leaf-vein:#0A3F29;
   --f-display:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif;
@@ -71,27 +72,34 @@ nav{display:flex;flex-wrap:wrap;gap:8px 28px}
 }
 
 /* Now Showing */
-.reel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:40px 24px;align-items:start}
-.tile{display:flex;flex-direction:column;gap:12px;min-width:0}
-.screen{position:relative;width:100%;background:#0F2260;border:1px solid var(--rule);border-radius:14px;overflow:hidden}
-.screen iframe,.screen video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
-.tile .meta{display:flex;flex-direction:column;gap:4px}
-.tile h3{font-size:22px;line-height:1.2}
-.tile .sub{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--warm)}
-.wide{grid-column:span 2}
-@media (max-width:560px){.wide{grid-column:auto}}
-.empty{border:1.5px dashed var(--rule);border-radius:14px;padding:40px 24px;text-align:center;color:var(--muted);font-size:13px;letter-spacing:.04em}
-.clients{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px}
-.reel-grid[hidden] + .clients{margin-top:0}
-.top-ads{margin-top:72px;padding:32px;border:1px solid var(--rule);border-radius:18px;background:#0F2260}
-.top-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px}
-.top-copy{display:flex;flex-direction:column;gap:10px;min-width:0;max-width:60ch}
-.top-copy h3{font-size:clamp(28px,4vw,44px);line-height:1.1}
-.top-copy p{margin:0;font-family:var(--f-sans);font-size:15px;line-height:1.6;color:var(--soft)}
-.open-folder{display:inline-flex;align-items:center;min-height:44px;padding:10px 20px;border-radius:999px;background:var(--warm);color:#1A1440;font-weight:500}
-.open-folder:hover{background:#FFD9A8;color:#1A1440}
-.folder-frame{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--rule)}
-.folder-frame iframe{display:block;width:100%;height:clamp(360px,50vw,520px);border:0}
+/* Gallery: one block per client, videos underneath */
+.gallery{display:flex;flex-direction:column;gap:clamp(56px,8vw,88px)}
+.gblock{display:flex;flex-direction:column;gap:22px;min-width:0}
+.ghead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;border-bottom:1px solid var(--rule);padding-bottom:14px}
+.ghead h3{font-size:clamp(2.4rem,6vw,4.2rem);line-height:.95;letter-spacing:-.025em}
+.ghead .sub{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--warm)}
+.gabout{margin:0;font-family:var(--f-sans);font-size:15px;line-height:1.65;color:var(--soft);max-width:62ch}
+.gal{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(10px,2vw,24px);max-width:1040px}
+.vitem{grid-column:span 2;display:flex;flex-direction:column;gap:8px;min-width:0}
+.vitem.land{grid-column:span 3}
+@media (max-width:560px){.vitem.land{grid-column:span 6}}
+.vlink{align-self:flex-start;font-size:11px;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--rule);padding:2px 0}
+.vlink:hover{color:#FFD9A8}
+.vcard{position:relative;border-radius:14px;overflow:hidden;background:#0A1A52;border:1px solid var(--rule);min-width:0}
+.vcard .frame{position:relative;width:100%}
+.vcard img,.vcard iframe,.vcard video{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;display:block;background:#000}
+.vplay{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center}
+.vplay::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(5,12,40,.55),rgba(5,12,40,0) 45%)}
+.vplay span{position:relative;z-index:1;width:clamp(40px,7vw,58px);height:clamp(40px,7vw,58px);border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,30,.35);transition:transform .2s}
+.vplay span::before{content:'';margin-left:4px;border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent var(--blue,#1F3A93)}
+.vplay:hover span{transform:scale(1.08)}
+.vplay:focus-visible{outline:2px solid #FFD9A8;outline-offset:-4px}
+.kuku{padding:clamp(24px,4vw,40px);border:1px solid var(--rule);border-radius:18px;background:#0F2260}
+.kuku .ghead{border-bottom:0;padding-bottom:0}
+.cp-points{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 32px;min-width:0}
+@media (max-width:560px){.cp-points{grid-template-columns:minmax(0,1fr)}}
+.cp-points li{border-top:1px solid var(--rule);padding-top:14px;font-family:var(--f-sans);font-size:15px;line-height:1.6;color:var(--soft)}
+.cp-points li b{display:block;font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.2;color:var(--ink);margin-bottom:6px}
 .chip{border:1px solid var(--rule);border-radius:999px;padding:6px 14px;font-size:12px;letter-spacing:.06em}
 
 /* What I do */
@@ -223,21 +231,7 @@ header.top,main .wrap{position:relative;z-index:2}
       <h2 id="work-h">Now Showing</h2>
       <span class="label muted">Meta ads · AI shorts · Social</span>
     </div>
-    <div class="reel-grid" id="reels"></div>
-    <div class="clients" aria-label="Clients">
-      <span class="chip">Funda</span><span class="chip">Speakeasy</span><span class="chip">Kuku FM</span><span class="chip">ATZA Digitally</span>
-    </div>
-
-    <div class="top-ads" id="topAds" hidden>
-      <div class="top-head">
-        <div class="top-copy">
-          <span class="label" style="color:var(--warm)">Top performers · Meta</span>
-          <h3>Best-performing Meta ads</h3>
-          <p>My highest-performing Meta ad videos.</p>
-        </div>
-        <a class="open-folder label" id="topLink" href="#" target="_blank" rel="noopener">Open folder ↗</a>
-      </div>
-    </div>
+    <div class="gallery" id="gallery"></div>
   </div>
 </section>
 
@@ -288,7 +282,7 @@ header.top,main .wrap{position:relative;z-index:2}
           <ul>
             <li>Produced AI-generated Meta ad videos for two client companies, Funda and Speakeasy, covering AI audio, frames and lip-sync.</li>
             <li>Edited and produced AI audio, video, frames and lip-sync content end to end, and reviewed final cuts before client handover.</li>
-            <li>Ran quality checks on content for Kuku FM, flagging errors, inconsistencies and quality issues before delivery.</li>
+            <li>For Kuku FM, wrote scripts, made and edited videos, and reviewed, quality-checked and approved content before delivery.</li>
           </ul>
         </div>
       </article>
@@ -346,7 +340,7 @@ header.top,main .wrap{position:relative;z-index:2}
         <span class="label muted" style="padding-top:12px">Phone</span>
         <a class="email" href="tel:+917388617878">+91 73886 17878</a>
         <div class="links label">
-          <a href="https://linkedin.com/in/drishya-singh" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://www.linkedin.com/in/drishya-singh-4070953a8" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
     </div>
@@ -361,31 +355,61 @@ header.top,main .wrap{position:relative;z-index:2}
 <script>
 /* =====================================================================
    YOUR VIDEOS — edit only the words inside the quotes ' '
-     title:  name of the video
-     client: the brand (or 'Personal project')
-     type:   e.g. 'Meta ad' or 'AI short'
-     ratio:  '9:16' phone video, '1:1' square, '16:9' landscape
-     drive:  the Google Drive share link of the video
-   Lines still showing PASTE_DRIVE_LINK_HERE are hidden on the site.
-   (Also works instead of drive:  youtube: 'VIDEO_ID'  or  src: 'videos/file.mp4')
-   ===================================================================== */
-const VIDEOS = [
-  { title: 'Video 1 title', client: 'Brand name', type: 'Meta ad', ratio: '9:16', drive: 'PASTE_DRIVE_LINK_HERE' },
-  { title: 'Video 2 title', client: 'Brand name', type: 'Meta ad', ratio: '9:16', drive: 'PASTE_DRIVE_LINK_HERE' },
-  { title: 'Video 3 title', client: 'Brand name', type: 'Meta ad', ratio: '9:16', drive: 'PASTE_DRIVE_LINK_HERE' },
-  { title: 'Video 4 title', client: 'Brand name', type: 'Meta ad', ratio: '9:16', drive: 'PASTE_DRIVE_LINK_HERE' },
-  { title: 'Video 5 title', client: 'Brand name', type: 'Meta ad', ratio: '9:16', drive: 'PASTE_DRIVE_LINK_HERE' },
-  { title: 'Video 6 title', client: 'Brand name', type: 'Meta ad', ratio: '9:16', drive: 'PASTE_DRIVE_LINK_HERE' },
-  { title: 'Video 7 title', client: 'Brand name', type: 'Meta ad', ratio: '9:16', drive: 'PASTE_DRIVE_LINK_HERE' },
-  { title: 'Video 8 title', client: 'Brand name', type: 'Meta ad', ratio: '9:16', drive: 'PASTE_DRIVE_LINK_HERE' },
-  { title: 'Video 9 title', client: 'Brand name', type: 'Meta ad', ratio: '9:16', drive: 'PASTE_DRIVE_LINK_HERE' },
-  { title: 'Video 10 title', client: 'Brand name', type: 'Meta ad', ratio: '9:16', drive: 'PASTE_DRIVE_LINK_HERE' },
-];
 
-/* TOP PERFORMERS — paste the share link of a Google Drive FOLDER that holds
-   your best-performing, client-approved Meta ad videos.
-   Leave it as PASTE_DRIVE_FOLDER_LINK_HERE and the section stays hidden. */
-const TOP_PERFORMERS_FOLDER = 'https://drive.google.com/drive/folders/1IoZT7e7yoSOchffOgaHqrEELaULn3-LK';
+   link:  paste the YouTube link of the video
+          (YouTube > your video > Share > Copy link,
+           e.g. https://youtube.com/shorts/AbCdEfGhIjK  or  https://youtu.be/AbCdEfGhIjK)
+          A Google Drive video link also works.
+   ratio: '9:16' phone video, '16:9' landscape, '1:1' square
+
+   Lines still showing PASTE_LINK_HERE are hidden on the site.
+   A client with no links yet is hidden too.
+   Need more videos? Copy a whole line, including the comma at the end.
+   ===================================================================== */
+const CLIENTS = [
+  {
+    name: 'Funda',
+    tag: 'Meta ads',
+    about: 'AI-generated Meta ad videos for Funda, with AI audio, frames and lip-sync, produced and edited end to end.',
+    videos: [
+      { link: 'https://youtube.com/shorts/VEU5oqC8MFc', ratio: '9:16' },
+      { link: 'https://youtube.com/shorts/4fjpIIejRNM', ratio: '9:16' },
+      { link: 'https://youtube.com/shorts/PuKPiiaZuf8', ratio: '9:16' },
+    ]
+  },
+  {
+    name: 'Speakeasy',
+    tag: 'Meta ads',
+    about: 'AI-generated Meta ad videos for Speakeasy, with AI audio, frames and lip-sync, reviewed before client handover.',
+    videos: [
+      { link: 'https://youtube.com/shorts/pJryfiKltWQ', ratio: '9:16' },
+      { link: 'https://youtube.com/shorts/CFAEC6xKpaw', ratio: '9:16' },
+      { link: 'https://youtube.com/shorts/kUu2X4_bRWM', ratio: '9:16' },
+    ]
+  },
+  {
+    name: 'ATZA Digitally',
+    tag: 'AI videos · Social',
+    about: 'AI videos for the agency’s own AI-focused social pages, published across Instagram, Facebook, YouTube, Reddit and Snapchat.',
+    videos: [
+      { link: 'https://youtube.com/shorts/r3S1d8CR5dE', ratio: '9:16' },
+      { link: 'https://youtube.com/shorts/tRg60_zKLjY', ratio: '9:16' },
+      { link: 'https://youtube.com/shorts/LietNQAkfrs', ratio: '9:16' },
+    ]
+  },
+  {
+    name: 'Kuku FM',
+    tag: 'Scripts · Editing · QC',
+    about: 'Scripts, video editing and quality control for Kuku FM, from the first draft to final approval.',
+    // Kuku FM shows written points instead of videos. Edit the words freely.
+    points: [
+      { title: 'Scriptwriting', text: 'Wrote the scripts for Kuku FM videos.' },
+      { title: 'Video production & editing', text: 'Made and edited the videos from those scripts.' },
+      { title: 'Quality checks', text: 'Checked text, visuals and audio for errors and inconsistencies, and against platform specs and brand consistency.' },
+      { title: 'Review & approval', text: 'Reviewed and approved content before it was delivered.' },
+    ]
+  },
+];
 
 /* YOUR PHOTO — your portrait is already built into this file.
    To swap it later: put the new photo in the same folder as this file
@@ -398,56 +422,83 @@ const PORTRAIT = '';
   const ytId = u => { const s = String(u||'').trim(); const m = s.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/); return m ? m[1] : (/^[\w-]{11}$/.test(s) ? s : null); };
   const ratioPad = r => { const m = String(r||'9:16').match(/(\d+(?:\.\d+)?)\s*[:x\/]\s*(\d+(?:\.\d+)?)/); return m ? (m[2]/m[1]*100) : 177.78; };
 
-  const list = VIDEOS.filter(v => v && (v.src || ytId(v.youtube) || driveId(v.drive)));
-  const grid = document.getElementById('reels');
+  const linkOf = v => v ? (v.link || v.youtube || v.drive || '') : '';
+  const isPlaceholder = u => !u || /PASTE_/.test(u);
+  const mediaOf = v => {
+    const u = String(linkOf(v)).trim();
+    if (isPlaceholder(u)) return null;
+    if (/youtu\.?be/.test(u) || /^[\w-]{11}$/.test(u)) { const id = ytId(u); return id ? { kind: 'yt', id } : null; }
+    if (/drive\.google|docs\.google/.test(u)) { const id = driveId(u); return id ? { kind: 'drive', id } : null; }
+    if (v.src) return { kind: 'file', src: v.src };
+    return null;
+  };
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 
-  if (!list.length) grid.hidden = true;   // no video links yet: show nothing here
-
-  list.forEach(v => {
-    const tile = document.createElement('article');
-    tile.className = 'tile';
+  function videoCard(v, label) {
+    const m = mediaOf(v); if (!m) return null;
     const pad = ratioPad(v.ratio);
-    if (pad < 75) tile.classList.add('wide');           // landscape videos take two columns
+    const item = el('div', 'vitem' + (pad < 90 ? ' land' : ''));
+    const card = el('div', 'vcard');
+    const frame = el('div', 'frame'); frame.style.paddingTop = pad + '%';
+    card.append(frame);
 
-    const scr = document.createElement('div');
-    scr.className = 'screen';
-    scr.style.paddingTop = pad + '%';
+    const play = () => {
+      let f;
+      if (m.kind === 'file') { f = document.createElement('video'); f.src = m.src; f.controls = true; f.autoplay = true; f.playsInline = true; }
+      else {
+        f = document.createElement('iframe');
+        f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+        f.allowFullscreen = true;
+        f.referrerPolicy = 'strict-origin-when-cross-origin';
+        f.src = m.kind === 'yt'
+          ? 'https://www.youtube.com/embed/' + m.id + '?autoplay=1&rel=0&playsinline=1&modestbranding=1'
+          : 'https://drive.google.com/file/d/' + m.id + '/preview';
+      }
+      f.title = label;
+      frame.replaceChildren(f);
+    };
 
-    let media;
-    if (v.src) {
-      media = document.createElement('video');
-      media.src = v.src; media.controls = true; media.preload = 'metadata'; media.playsInline = true;
-    } else {
-      media = document.createElement('iframe');
-      media.loading = 'lazy';
-      media.allow = 'autoplay; fullscreen; picture-in-picture';
-      media.allowFullscreen = true;
-      media.src = ytId(v.youtube)
-        ? 'https://www.youtube.com/embed/' + ytId(v.youtube) + '?rel=0'
-        : 'https://drive.google.com/file/d/' + driveId(v.drive) + '/preview';
-    }
-    media.title = v.title || 'Video';
-    scr.appendChild(media);
+    const img = new Image();
+    img.alt = ''; img.loading = 'lazy';
+    img.src = m.kind === 'yt' ? 'https://i.ytimg.com/vi/' + m.id + '/hqdefault.jpg'
+            : m.kind === 'drive' ? 'https://drive.google.com/thumbnail?id=' + m.id + '&sz=w640' : '';
+    img.onerror = () => img.remove();
+    const btn = el('button', 'vplay'); btn.type = 'button'; btn.setAttribute('aria-label', 'Play ' + label);
+    btn.append(el('span'));
+    btn.addEventListener('click', play);
+    if (img.src) frame.append(img);
+    frame.append(btn);
 
-    const meta = document.createElement('div');
-    meta.className = 'meta';
-    const sub = document.createElement('span');
-    sub.className = 'sub';
-    sub.textContent = [v.client, v.type].filter(Boolean).join(' · ');
-    const h = document.createElement('h3');
-    h.textContent = v.title || '';
-    meta.append(sub, h);
-
-    tile.append(scr, meta);
-    grid.appendChild(tile);
-  });
-
-  // Top performers folder
-  const fm = String(TOP_PERFORMERS_FOLDER||'').match(/folders\/([\w-]{10,})/) || String(TOP_PERFORMERS_FOLDER||'').match(/[?&]id=([\w-]{10,})/);
-  if (fm) {
-    document.getElementById('topLink').href = 'https://drive.google.com/drive/folders/' + fm[1];
-    document.getElementById('topAds').hidden = false;
+    // Backup link, in case a browser blocks the player
+    const out = el('a', 'vlink', m.kind === 'yt' ? 'Watch on YouTube ↗' : m.kind === 'drive' ? 'Open in Drive ↗' : 'Open video ↗');
+    out.href = m.kind === 'yt' ? (/shorts\//.test(linkOf(v)) ? 'https://youtube.com/shorts/' + m.id : 'https://youtu.be/' + m.id)
+             : m.kind === 'drive' ? 'https://drive.google.com/file/d/' + m.id + '/view' : m.src;
+    out.target = '_blank'; out.rel = 'noopener';
+    item.append(card, out);
+    return item;
   }
+
+  const gallery = document.getElementById('gallery');
+  CLIENTS.forEach(c => {
+    const block = el('article', 'gblock');
+    const head = el('div', 'ghead');
+    head.append(el('h3', null, c.name), el('span', 'sub', c.tag || ''));
+
+    if (c.points && c.points.length) {
+      block.classList.add('kuku');
+      const ul = el('ul', 'cp-points');
+      c.points.forEach(p => { const li = el('li'); li.append(el('b', null, p.title), document.createTextNode(p.text)); ul.append(li); });
+      block.append(head, el('p', 'gabout', c.about || ''), ul);
+      gallery.append(block);
+      return;
+    }
+
+    const cards = (c.videos || []).map((v, i) => videoCard(v, c.name + ' video ' + (i + 1))).filter(Boolean);
+    if (!cards.length) return;                    // no links yet: keep this client hidden
+    const grid = el('div', 'gal'); grid.append(...cards);
+    block.append(head, el('p', 'gabout', c.about || ''), grid);
+    gallery.append(block);
+  });
 
   // Portrait: shows if the file exists, otherwise the placeholder stays
   const img = document.getElementById('portrait'), arch = document.getElementById('arch');
